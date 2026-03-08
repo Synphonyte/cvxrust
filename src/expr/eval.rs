@@ -164,7 +164,6 @@ impl Expr {
             Expr::Diag(a) => Ok(eval_diag(a.eval(ctx)?)),
         }
     }
-
 }
 
 // ---- Array arithmetic helpers ----
@@ -252,8 +251,7 @@ fn eval_sum(a: Array, axis: Option<usize>) -> crate::Result<Array> {
         Some(0) => {
             // Sum along axis 0 (rows) → column vector of size ncols
             let m = arr_to_dense(a);
-            let result =
-                DMatrix::from_fn(m.ncols(), 1, |j, _| m.column(j).iter().sum::<f64>());
+            let result = DMatrix::from_fn(m.ncols(), 1, |j, _| m.column(j).iter().sum::<f64>());
             Ok(Array::Dense(result))
         }
         Some(1) => {
@@ -283,7 +281,9 @@ fn eval_reshape(a: Array, shape: &Shape) -> crate::Result<Array> {
     };
     let (rows, cols) = (shape.rows(), shape.cols());
     if flat.len() != rows * cols {
-        return Err(crate::CvxError::InvalidProblem("Reshape size mismatch".into()));
+        return Err(crate::CvxError::InvalidProblem(
+            "Reshape size mismatch".into(),
+        ));
     }
     if shape.is_scalar() {
         Ok(Array::Scalar(flat[0]))
@@ -515,7 +515,7 @@ fn eval_cumsum(a: Array, axis: Option<usize>) -> crate::Result<Array> {
 fn eval_diag(a: Array) -> Array {
     let m = arr_to_dense(a);
     let (rows, cols) = (m.nrows(), m.ncols());
-    if cols == 1 || (rows == 1 && cols != 1) {
+    if cols == 1 || rows == 1 {
         // Vector → diagonal matrix
         let n = rows.max(cols);
         let mut result = DMatrix::zeros(n, n);

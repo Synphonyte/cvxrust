@@ -108,7 +108,10 @@ fn test_value_norm2_matches_objective() {
 
     let reported = sol.value.unwrap();
     let via_eval = obj.value(&sol).as_scalar().unwrap();
-    assert!(approx(reported, via_eval), "reported={reported}, eval={via_eval}");
+    assert!(
+        approx(reported, via_eval),
+        "reported={reported}, eval={via_eval}"
+    );
     assert!(approx(reported, 2f64.sqrt()));
 }
 
@@ -152,7 +155,10 @@ fn test_value_sum_squares_matches_objective() {
 
     let reported = sol.value.unwrap();
     let via_eval = obj.value(&sol).as_scalar().unwrap();
-    assert!(approx(reported, via_eval), "reported={reported}, eval={via_eval}");
+    assert!(
+        approx(reported, via_eval),
+        "reported={reported}, eval={via_eval}"
+    );
     assert!(approx(reported, 8.0));
 }
 
@@ -175,7 +181,7 @@ fn test_value_abs() {
 fn test_eval_missing_variable_returns_err() {
     // Create a variable that is never added to any solution
     let x = variable(());
-    let y = variable(());  // y is not in the solution for x
+    let y = variable(()); // y is not in the solution for x
 
     let sol = Problem::minimize(x.clone())
         .subject_to([x.ge(1.0)])
@@ -265,7 +271,10 @@ fn test_parity_large_vector_variable() {
     let new = x.value(&sol);
     for i in 0..5 {
         assert!(approx(old[(i, 0)], new[(i, 0)]), "mismatch at row {i}");
-        assert!(approx(new[(i, 0)], (i + 1) as f64), "wrong value at row {i}");
+        assert!(
+            approx(new[(i, 0)], (i + 1) as f64),
+            "wrong value at row {i}"
+        );
     }
 }
 
@@ -301,6 +310,9 @@ fn test_value_lp_objective_matches_solution_value() {
 
     let via_sol = sol.value.unwrap();
     let via_expr = obj.value(&sol).as_scalar().unwrap();
-    assert!(approx(via_sol, via_expr), "sol.value={via_sol} != obj.value(&sol)={via_expr}");
+    assert!(
+        approx(via_sol, via_expr),
+        "sol.value={via_sol} != obj.value(&sol)={via_expr}"
+    );
     assert!(approx(via_sol, 6.0)); // 1*1 + 2*1 + 3*1
 }

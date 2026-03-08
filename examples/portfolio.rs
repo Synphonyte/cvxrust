@@ -56,7 +56,10 @@ fn main() {
 
     // Expression values: evaluate return and risk directly
     let actual_return = dot(&mu, &x).value(&solution).as_scalar().unwrap();
-    println!("  Actual return (expression eval): {:.2}%", actual_return * 100.0);
+    println!(
+        "  Actual return (expression eval): {:.2}%",
+        actual_return * 100.0
+    );
 
     let variance = solution.value.unwrap();
     let std_dev = variance.sqrt();
