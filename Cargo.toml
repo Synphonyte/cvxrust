@@ -2,7 +2,6 @@
 name = "cvxrust"
 version = "0.1.0"
 edition = "2021"
-authors = ["CVXPY team"]
 description = "A Rust implementation of Disciplined Convex Programming"
 license = "Apache-2.0"
 repository = "https://github.com/cvxpy/cvxrust"
@@ -13,11 +12,11 @@ rust-version = "1.71"
 
 [dependencies]
 # Clarabel solver
-clarabel = "0.9"
+clarabel = "0.11"
 
 # Sparse matrices
-nalgebra = "0.33"
-nalgebra-sparse = "0.10"
+nalgebra = "0.34"
+nalgebra-sparse = "0.11"
 
 # Error handling
 thiserror = "2.0"
