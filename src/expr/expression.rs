@@ -329,7 +329,7 @@ impl Expr {
                 for (i, r) in spec.ranges.iter().enumerate() {
                     match r {
                         Some((start, stop, step)) => {
-                            let size = (stop - start + step - 1) / step;
+                            let size = (stop - start).div_ceil(*step);
                             if size > 1 {
                                 new_dims.push(size);
                             }
