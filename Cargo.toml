@@ -8,7 +8,7 @@ repository = "https://github.com/cvxpy/cvxrust"
 documentation = "https://docs.rs/cvxrust"
 keywords = ["optimization", "convex", "dcp", "solver", "math"]
 categories = ["mathematics", "algorithms", "science"]
-rust-version = "1.85"
+rust-version = "1.87"
 
 [dependencies]
 # Clarabel solver
